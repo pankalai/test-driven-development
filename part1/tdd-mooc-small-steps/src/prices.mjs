@@ -69,7 +69,7 @@ function createApp(database) {
 
   function calculateReduction(date) {
     let reduction = 0;
-    if (date && isMonday(date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate()) && !isHoliday(date)) {
+    if (date && isMonday(date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate()) && !isHoliday(date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate())) {
       reduction = 35;
     }
     return reduction;
@@ -80,7 +80,6 @@ function createApp(database) {
   }
 
   function isHoliday(date) {
-    date = date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = Temporal.PlainDate.from(row.holiday);
