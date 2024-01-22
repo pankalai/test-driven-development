@@ -80,6 +80,7 @@ function createApp(database) {
   }
 
   function isHoliday(date) {
+    let date1 = date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
     let date2 = date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
     const holidays = database.getHolidays();
     for (let row of holidays) {
